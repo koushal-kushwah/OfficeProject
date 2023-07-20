@@ -2,26 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('leave_request', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      email: {
+      description: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      days: {
+        type: Sequelize.FLOAT,
+        allowNull:false
+      },
+      start_date: {
+        type: Sequelize.DATE,
+        allowNull:false
+      },
+      request_date: {
+        type: Sequelize.DATE,
+        allowNull:false
+      },
+      leave_type: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      leave_status: {
         type: Sequelize.STRING,
         allowNull:false,
-        unique: true
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull:false,
-      },
-      status: {
-        type: Sequelize.BOOLEAN,
-        allowNull:false,
-        default :true
+        default: "Pending"
       },
       emp_id :{
         type: Sequelize.INTEGER,
@@ -42,6 +53,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('leave_request');
   }
 };
